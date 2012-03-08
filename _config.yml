@@ -1,0 +1,11 @@
+auto: true
+
+exclude:
+    - README
+
+title: Kandela Demo Website
+url: http://kandelakig.github.com
+
+author:
+    name: Giorgi Kandelaki
+    email: kandelakig@gmail.com
