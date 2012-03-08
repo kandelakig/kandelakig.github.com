@@ -1,9 +1,52 @@
 <html>
 <head>
 	<title>{{ site.title }}</title>
+	{% include styles.html %}
 </head>
 <body>
-	<h1>Hello World!</h1>
-	<p>Test, Test2</p>
+	{% include header-box.html %}
+	<div id="side-box">
+		<ul id="side-menu">
+			{% for category in site.categories %}
+				<li>{{ category.first }} ({{ category.last.size }})</li>
+			{% endfor %}
+
+			{% comment %}
+			{% for x in site.categories.Announsments %}
+				previous {{ x.previous.title }}  <br />
+				category {{ x.category }}  <br />
+				title {{ x.title }}  <br />
+				url {{ x.url }}  <br />
+				date {{ x.date }}  <br />
+				id {{ x.id }}  <br />
+				tags {{ x.tags | join( ) }}  <br />
+				content {{ x.content }}  <br />
+				categories {{ x.categories | join( ) }}  <br />
+				next {{ x.next.title }}  <br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+			{% endfor %}
+			{% endcomment %}
+		</ul>
+	</div>
+	<div id="main-box">
+		<div id="recent-posts-box">
+		{% for p in site.posts limit:3 %}
+			<h1>{{ p.title }}</h1>
+			{{ p.content }}
+		{% endfor %}
+		</div>
+		<div id="archive-box">
+			<h1>Archive</h1>
+			<ul>
+			{% for p in site.posts %}
+				<li>{{ p.title }} - {{ p.date | date_to_long_string }}</li>
+			{% endfor %}
+			</ul>
+		</div>
+	</div>
 </body>
 </html>
