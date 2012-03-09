@@ -5,47 +5,33 @@
 </head>
 <body>
 	{% include header-box.html %}
-	<div id="side-box">
-		<ul id="side-menu">
-			{% for category in site.categories %}
-				<li>{{ category.first }} ({{ category.last.size }})</li>
-			{% endfor %}
-
-			{% comment %}
-			{% for x in site.categories.Announsments %}
-				previous {{ x.previous.title }}  <br />
-				category {{ x.category }}  <br />
-				title {{ x.title }}  <br />
-				url {{ x.url }}  <br />
-				date {{ x.date }}  <br />
-				id {{ x.id }}  <br />
-				tags {{ x.tags | join( ) }}  <br />
-				content {{ x.content }}  <br />
-				categories {{ x.categories | join( ) }}  <br />
-				next {{ x.next.title }}  <br />
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />
-			{% endfor %}
-			{% endcomment %}
-		</ul>
-	</div>
 	<div id="main-box">
+		<div id="side-box">
+			<div id="side-menu-box" class="round-corners">
+				<h1 id="side-menu-title" class="side-box-title">Categories</h1>
+				<ul id="side-menu" class="side-box-list">
+					{% for c in site.categories %}
+						<li><a href="#">{{ c.first }} ({{ c.last.size }})</a></li>
+					{% endfor %}
+				</ul>
+			</div>
+			<div id="archive-box" class="round-corners">
+				<h1 id="archive-title" class="side-box-title">Archive</h1>
+				<ul id="archive-list" class="side-box-list">
+				{% for p in site.posts %}
+					<li><a href="#">{{ p.title }} - {{ p.date | date_to_string }}</a></li>
+				{% endfor %}
+				</ul>
+			</div>
+		</div>
+
 		<div id="recent-posts-box">
 		{% for p in site.posts limit:3 %}
-			<h1>{{ p.title }}</h1>
-			{{ p.content }}
+			<div class="post-container round-corners">
+				<h1>{{ p.title }}</h1>
+				{{ p.content }}
+			</div>
 		{% endfor %}
-		</div>
-		<div id="archive-box">
-			<h1>Archive</h1>
-			<ul>
-			{% for p in site.posts %}
-				<li>{{ p.title }} - {{ p.date | date_to_long_string }}</li>
-			{% endfor %}
-			</ul>
 		</div>
 	</div>
 </body>
